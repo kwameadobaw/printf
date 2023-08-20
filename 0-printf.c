@@ -12,6 +12,7 @@ int _printf(const char *format, ...)
 	int count;
 	char *str;
 	va_list args;
+	int c;
 
 	va_start(args, format);
 	count = 0;
@@ -27,7 +28,7 @@ int _printf(const char *format, ...)
 				return (-1);
 			if (*format == 'c')
 			{
-				c = (char)va_arg(args, int);
+				c = va_arg(args, int);
 				_putchar(c);
 				count++;
 			}
@@ -43,7 +44,7 @@ int _printf(const char *format, ...)
 					count++;
 				}
 			}
-			else if (*fromat == '%')
+			else if (*format == '%')
 			{
 				_putchar('%');
 				count++;

@@ -1,79 +1,50 @@
 #include "main.h"
 /**
- * _abs - get the absolute value
- * @n: the value
- * Return: absolute value
- */
-int _abs(int n)
+ * _printf - Custom implementation of printf
+ * @format: format string
+ * @:...: Variable number of arguments
+ * Return: Number of characters printed
+*/
+int _printf(const char *format, ...)
 {
-	return (n < 0 ? -n : n);
-}
+	va_list args;
+	int count, num;
 
-/**
- * _strlen - get the length of a string
- * @s: the string
- * Return: Length of a string
- */
-int _strlen(char *s)
-{
-	int len = 0;
+	count = 0;
+	va_start(args, format);
 
-	while (*s++)
-		len++;
-	return (len);
-}
-
-/**
- * _reverse - reverse a string
- * @s: the string
- */
-void _reverse(char *s)
-{
-	int i = 0;
-	int j = _strlen(s) - 1;
-	char tmp;
-
-	while (i < j)
+	if (!format)
+		return (-1);
+	while (*format)
 	{
-		tmp = s[i];
-		s[i] = s[j];
-		s[j] = tmp;
-		i++;
-		j--;
+		if (*format == '%')
+		{
+			format++;
+
+			if (*format == '\0')
+				return (-1);
+			switch (*format)
+			{
+				/* Handle integer specifiers */
+				case 'd':
+				case 'i':
+					{
+					num = va_arg(args, int);
+					print_integer(num);
+					break;
+					}
+					_putchar('%');
+					_putchar(*format);
+					count += 2;
+			}
+		}
+		else
+		{
+			_putchar(*format);
+			count++;
+		}
+		format++;
 	}
-}
-
-/**
- * _itoa - converts integer to string of digits
- * @n: the integer value
- * @s: the string of digits
- */
-void _itoa(int n, char *s)
-{
-	int i = 0;
-	int sign = n;
-
-	if (n == 0)
-		s[i++] = '0';
-	while (n != 0)
-	{
-		s[i++] = _abs(n % 10) + '0';
-		n /= 10;
-	}
-	if (sign < 0)
-		s[i++] = '-';
-	s[i] = '\0';
-	_reverse(s);
-}
-
-/**
- * _print_int - print integer
- * @n: the value to be printed
- */
-void _print_int(int n)
-{
-	char s[20];
-
-	_itoa(n, s);
-	write(1, s, _strlen(s));
+	va_end(args);
+	return (count);
 }

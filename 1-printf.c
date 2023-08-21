@@ -50,7 +50,7 @@ int print_string(va_list args)
 */
 int print_int(va_list args)
 {
-	int num, int count, num_digits, temp, num_digits, temp, divisor;
+	int num, count, num_digits, temp, divisor, i;
 
 	num = va_arg(args, int);
 	count = 0;
@@ -70,7 +70,7 @@ int print_int(va_list args)
 	} while (temp != 0);
 
 	divisor = 1;
-	for (int i = 1; i < num_digits; i++)
+	for (i = 1; i < num_digits; i++)
 		divisor *= 10;
 
 	while (divisor > 0)

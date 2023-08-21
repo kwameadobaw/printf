@@ -5,20 +5,23 @@
  */
 void printBinary(unsigned int num)
 {
+	int i;
+	int b[32];
+	int index;
+
 	if (num == 0)
 	{
 		_putchar('0');
 		return;
 	}
-	int b[32];
-	int index = 0;
+	index = 0;
 
 	while (num > 0)
 	{
 		b[index++] = num % 2;
 		num /= 2;
 	}
-	for (int i = index - 1; i >= 0; i--)
+	for (i = index - 1; i >= 0; i--)
 	{
 		_putchar(b[i] + '0');
 	}

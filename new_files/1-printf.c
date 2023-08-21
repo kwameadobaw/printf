@@ -1,61 +1,118 @@
+#include <stdarg.h>
 #include "main.h"
+
 /**
- * print_integer - Print an integer without using printf
- * @num: The integer to be printed
- */
-void print_integer(int num)
+ * print_char - Print a character
+ * @args: Arguments list
+ *
+ * Return: Number of characters printed
+*/
+int print_char(va_list args)
 {
-	int i;
-	char buffer [20];
-	int idx;
+	char c;
+
+	va_arg(args, int);
+
+	_putchar(c);
+	return (1);
+}
+
+/**
+ * print_string - Prints a string
+ * @args: Arguments list
+ *
+ * Return: Number of characters printed
+*/
+int print_string(va_list args)
+{
+	char *str;
+	int count;
+
+	str = va_arg(args, char *);
+	count = 0;
+
+	if (!str)
+		str = "(null)";
+	while (*str)
+	{
+		_putchar(*str);
+		str++;
+		count++;
+	}
+	return (count);
+}
+
+/**
+ * print_int - Print an integer
+ * @args: Arguments list
+ *
+ * Return: Number of characters printed
+*/
+int print_int(va_list args)
+{
+	int num, count, num_digits, temp, divisor, i;
+
+	num = va_arg(args, int);
+	count = 0;
 
 	if (num < 0)
 	{
 		_putchar('-');
+		count++;
 		num = -num;
 	}
-	if (num == 0)
+
+	num_digits = 0;
+	temp = num;
+	do {
+		num_digits++;
+		temp /= 10;
+	} while (temp != 0);
+
+	divisor = 1;
+	for (i = 1; i < num_digits; i++)
+		divisor *= 10;
+
+	while (divisor > 0)
 	{
-		_putchar('0');
-		return;
+		int digit = num / divisor;
+
+		_putchar('0' + digit);
+		count++;
+		num %= divisor;
+		divisor /= 10;
 	}
 
-	while (num > 0)
-	{
-		buffer[idx++] = '0' + (num % 10);
-		num /= 10;
-	}
-	for (i = idx - 1; i >= 0; --i)
-	{
-		_putchar(buffer[i]);
-	}
+	return (count);
 }
 
 /**
- * custom_printf - Custom implementation of printf
+ * _printf - Custom printf function
  * @format: The format string
- * @...: Additional arguments
- */
-void custom_printf(const char *format, ...)
+ * @...: Additional arguments based on format
+ *
+ * Return: Number of characters printed
+*/
+int _printf(const char *format, ...)
 {
-	int i;
+	int count;
 	va_list args;
 
 	va_start(args, format);
-
-	for (i = 0; format[i] != '\0'; ++i)
+	if (!format)
+		return (-1);
+	while (*format)
 	{
-		if (format[i] == '%' && (format[i + 1] == 'd' || format[i + 1] == 'i'))
+		if (*format == '%')
 		{
-			int num = va_arg(args, int);
-
-			print_integer(num);
-			++i;
+			format++;
+			if (*format == '\0')
+				return (-1);
+			if (*format == 'c')
+				count++;
 		}
-		else
-		{
-			_putchar(format[i]);
-		}
+		format++;
 	}
 	va_end(args);
+	return (count);
 }

@@ -1,42 +1,28 @@
+#include <stdarg.h>
 #include "main.h"
 /**
  * _printf - Custom implementation of printf
  * @format: format string
- * @:...: Variable number of arguments
  * Return: Number of characters printed
 */
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int count, num;
+	int count;
 
 	count = 0;
 	va_start(args, format);
 
-	if (!format)
-		return (-1);
-	while (*format)
+	while (*format != '\0')
 	{
 		if (*format == '%')
 		{
 			format++;
-
-			if (*format == '\0')
-				return (-1);
-			switch (*format)
+			if (*format == 'd' || *format == 'i')
 			{
-				/* Handle integer specifiers */
-				case 'd':
-				case 'i':
-					{
-					num = va_arg(args, int);
-					print_integer(num);
-					break;
-					}
-					_putchar('%');
-					_putchar(*format);
-					count += 2;
+				count += print_int(args);
 			}
+
 		}
 		else
 		{
@@ -45,6 +31,49 @@ int _printf(const char *format, ...)
 		}
 		format++;
 	}
+
 	va_end(args);
+	return (count);
+}
+/**
+ * print_int - Print an integer
+ * @args: Arguments list
+ *
+ * Return: Number oof characters printed
+*/
+int print_int(va_list args)
+{
+	int num, count, num_digits, temp, divisor, i;
+
+	num = va_arg(args, int);
+	count = 0;
+
+	if (num < 0)
+	{
+		_putchar('-');
+		count++;
+		num = -num;
+	}
+
+	num_digits = 0;
+	temp = num;
+	do {
+		num_digits++;
+		temp /= 10;
+	} while (temp != 0);
+
+	divisor = 1;
+	for (i = 1; i < num_digits; i++)
+		divisor *= 10;
+	while (divisor > 0)
+	{
+		int digit = num / divisor;
+
+		_putchar('0' + digit);
+		count++;
+		num %= divisor;
+		divisor /= 10;
+	}
+
 	return (count);
 }

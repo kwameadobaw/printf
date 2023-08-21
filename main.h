@@ -6,12 +6,18 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <stddef.h>
+
 
 int _putchar(char c);
 int _printf(const char *format, ...);
-int print_char(va_list args);
-int print_string(va_list args);
-int print_percent(void);
-void custom_printf(const char *format, ...);
-void print_integer(int num);
+void handle_percent(va_list args);
+void percent_handler(va_list args);
+void handle_string(va_list args);
+void s_handler(va_list args);
+void handle_percent(va_list args);
+void percent_handler(va_list args);
+void handle_character(va_list args);
+void c_handler(va_list args);
+
 #endif

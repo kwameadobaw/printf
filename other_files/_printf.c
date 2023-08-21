@@ -5,10 +5,10 @@
  * Return: the length
  */
 
-typedef void (*conversion_handler)(va_list args);
+typedef void (*conversion_handler)(va_list args)
 {
-	char specifier;
-	conversion_handler handler;
+        char specifier;
+        conversion_handler handler;
 } conversion_specifier;
 
 conversion_specifier specifiers[] = {
@@ -17,6 +17,7 @@ conversion_specifier specifiers[] = {
 	{'%', percent_handler},
 	{'\0', NULL}
 };
+
 int _printf(const char *format, ...)
 {
 	va_list args;
@@ -32,7 +33,7 @@ int _printf(const char *format, ...)
 			format++;
 			if (*format == '\0')
 				return (-1);
-			conversion_specifier *specifier = specifiers;
+			conversion_specifier *specifiers = specifiers;
 
 			while (specifier->specifier != '\0')
 			{

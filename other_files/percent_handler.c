@@ -5,7 +5,9 @@
  */
 void handle_percent(va_list args)
 {
-	char percent = '%';
+	(void)args;
+	char percent;
+	percent	= '%';
 
 	write(1, &percent, 1);
 }
@@ -16,5 +18,6 @@ void handle_percent(va_list args)
  */
 void percent_handler(va_list args)
 {
+	(void)args;
 	handle_percent(args);
 }

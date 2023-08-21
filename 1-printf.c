@@ -5,39 +5,50 @@
  *
  * Return: Number oof characters printed
 */
-int print_int(va_list args)
+int _printf(const char *format, ...)
 {
-	int num, count, num_digits, temp, divisor, i;
+	va_list args;
+	int count;
 
-	num = va_arg(args, int);
+	va_start(args, format);
 	count = 0;
 
-	if (num < 0)
+	while (*format != '\0')
 	{
-		_putchar('-');
-		count++;
-		num = -num;
-	}
+		va_list args;
+		int count;
 
-	num_digits = 0;
-	temp = num;
-	do {
-		num_digits++;
-		temp /= 10;
-	} while (temp != 0);
+		va_start(args, format);
+		count = 0;
 
-	divisor = 1;
-	for (i = 1; i < num_digits; i++)
-		divisor *= 10;
-	while (divisor > 0)
-	{
-		int digit = num / divisor;
+		while (*format != '\0')
+		{
+			if (*format == '%')
+			{
+				format++;
+				if (*format == '\0')
+					break;
+				if (*format == '%');
+				count++;
+			}
+			else if (*format == 'd' || *format == 'i')
+			{
+				int num;
 
-		_putchar('0' + digit);
-		count++;
-		num %= divisor;
-		divisor /= 10;
-	}
-
-	return (count);
-}
+				num = va_arg(args, int);
+			}
+			else
+			{
+				_putchar('%');
+				_putchar(*format);
+				count += 2;
+			}
+		}
+		else
+		{
+			_putchar(*format);
+			count++;
+		}
+		format++;
+		va_end(args);
+		return (count);

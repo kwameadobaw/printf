@@ -15,6 +15,15 @@ int _printf(const char *format, ...)
 
 	while (*format != '\0')
 	{
+<<<<<<< HEAD
+=======
+		va_list args;
+		int count;
+
+		va_start(args, format);
+		count = 0;
+		
+>>>>>>> ba6f88df8c1c460756b58835230a468d190ad9e4
 		if (*format == '%')
 		{
 			format++;

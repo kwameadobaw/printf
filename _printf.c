@@ -1,6 +1,8 @@
 #include <stdarg.h>
 #include <unistd.h>
 #include "main.h"
+char buffer[BUFFER_SIZE];
+int buffer_index = 0;
 int _printf(const char *format, ...)
 {
 	va_list args;

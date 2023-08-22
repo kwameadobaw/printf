@@ -23,4 +23,5 @@ int print_percent(void);
 int _printf_int(const char *format, ...);
 int _process_format_specifier(const char **format, char *buffer, size_t remaining_size, va_list args, int *printed_chars);
 int _print_num_rec(int n, char *buffer, size_t size, size_t index);
+int _print_number_base(unsigned int n, int base, int uppercase);
 #endif /* MAIN_H */

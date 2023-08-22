@@ -1,44 +1,47 @@
 #include "main.h"
-
-int _print_number(int n, char *buffer, size_t size)
+/**
+ * _print_num_rec - Recursively print an int to buffer
+ * @n: The interger to be printed
+ * @buffer: The buffer to store the printed string.
+ * @size: The size of the buffer
+ * @index: The number of characters printed.
+*/
+int _print_num_rec(int n, char *buffer, size_t size, size_t index)
 {
-	int printed_chars;
-	size_t start;
-	size_t end;
-	char temp;
-	size_t index;
+	int digits;
 
-	printed_chars = 0;
-
-	if (n < 0)
+	if (n == 0)
 	{
-		if (size > 0)
-		{
-			buffer[0] = '-';
-		}
-		printed_chars++;
-		n = -n;
+		buffer[index] = '0';
+		return (0);
 	}
-	index = printed_chars;
-	while (n != 0 && index < size - 1)
+	else if (n < 0)
 	{
-		buffer[index] = (n % 10) + '0';
-		n /= 10;
-		index++;
-		printed_chars++;
+		buffer[index] = '-';
+		return (1) + (_print_num_rec(-n, buffer, size, index + 1));
 	}
-	start = printed_chars > 0 ? printed_chars - 1 : 0;
-	end = index - 1;
-	while (start < end)
+	else if (index >= size - 1)
+		return (0);
+	else
 	{
-		temp = buffer[start];
-		buffer[start] = buffer[end];
-		buffer[end] = temp;
-		start++;
-		end--;
+		digits = _print_num_rec(n / 10, buffer, size, index);
+		buffer[index + digits] = (n % 10) + '0';
+		return (digits + 1);
 	}
-
-	buffer[index] = '\0';
-	return (printed_chars);
 }
 
+/**
+ * print_number - Print an integer to buffer
+ * @n: The integer to be printed
+ * @buffer: The buffer to store the printed string
+ * @size: The size of the buffer
+ * Return: The number of characters printed
+*/
+int _print_number(int n, char *buffer, size_t size)
+{
+	size_t index = 0;
+	int printed_chars = _print_num_rec(n, buffer, size, index);
+
+	buffer[printed_chars] = '\0';
+	return (printed_chars);
+}

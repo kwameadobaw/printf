@@ -20,15 +20,15 @@ int _printf(const char *format, ...)
 
 		va_start(args, format);
 		count = 0;
-
-		while (*format != '\0')
+		
+		if (*format == '%')
 		{
+			format++;
+			if (*format == '\0')
+				break;
 			if (*format == '%')
 			{
-				format++;
-				if (*format == '\0')
-					break;
-				if (*format == '%');
+				_putchar('%');
 				count++;
 			}
 			else if (*format == 'd' || *format == 'i')
@@ -50,5 +50,8 @@ int _printf(const char *format, ...)
 			count++;
 		}
 		format++;
-		va_end(args);
-		return (count);
+	}
+	
+	va_end(args);
+	return (count);
+}

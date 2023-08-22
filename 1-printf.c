@@ -8,19 +8,13 @@
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int count;
+	int count, num;
 
 	va_start(args, format);
 	count = 0;
 
 	while (*format != '\0')
 	{
-		va_list args;
-		int count;
-
-		va_start(args, format);
-		count = 0;
-		
 		if (*format == '%')
 		{
 			format++;

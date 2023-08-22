@@ -7,6 +7,7 @@ int _printf(const char *format, ...)
 	int printed_chars;
 	char buffer[BUFFER_SIZE];
 
+	va_start(args, format);
 	printed_chars = _vsnprintf(buffer, BUFFER_SIZE, format, args);
 
 	write(1, buffer, printed_chars);

@@ -18,8 +18,9 @@ int _vsnprintf(char *buffer, size_t size, const char *format, va_list args);
 int print_int(va_list args);
 int _printf(const char *format, ...);
 int print_char(va_list args);
-int print_string(va_list args);
+int _print_string(char *buffer, size_t size, const char *str);
 int print_percent(void);
 int _printf_int(const char *format, ...);
-
+int _process_format_specifier(const char **format, char *buffer, size_t remaining_size, va_list args, int *printed_chars);
+int _print_num_rec(int n, char *buffer, size_t size, size_t index);
 #endif /* MAIN_H */

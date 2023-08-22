@@ -3,12 +3,12 @@
 int _print_unsigned(unsigned int n, int base, int uppercase, char *buffer, size_t size)
 {
 	int printed_chars;
-	char digits, temp;
+	char digits[16];
+	char temp;
 	const char *base_digits;
 	size_t index, start, end, i;
 
 	printed_chars = 0;
-	digits[16];
 	base_digits = uppercase ? "0123456789ABCDEF" : "0123456789abcdef";
 
 	if (n == 0)

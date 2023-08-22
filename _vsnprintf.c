@@ -8,7 +8,7 @@ int _vsnprintf(char *buffer, size_t size, const char *format, va_list args)
 	printed_chars = 0;
 	buffer_index = 0;
 
-	while (*format && buffer_index < size - 1)
+	while (*format && (size_t)buffer_index < size - 1)
 	{
 		if (*format == '%')
 		{
@@ -52,6 +52,7 @@ int _vsnprintf(char *buffer, size_t size, const char *format, va_list args)
 
 				case 'X':
 					printed_chars += _print_hex(va_arg(args, unsigned int), 1, &buffer[buffer_index], size - buffer_index);
+					break;
 				
 				case 'x':
 					printed_chars += _print_hex(va_arg(args, unsigned int), 0, &buffer[buffer_index], size - buffer_index);

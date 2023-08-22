@@ -3,13 +3,14 @@
 int _print_hex(unsigned int n, int uppercase, char *buffer, size_t size)
 {
 	int printed_chars;
-	char digits, temp;
-	const char *base;
+	char temp;
 	size_t index, start, end, i;
+	char digits[16];
+	const char *base_digits;
+
+	base_digits = uppercase ? "0123456789ABCDEF" : "0123456789abcdef";
 
 	printed_chars = 0;
-	digits[16];
-	base_digits = uppercase ? "0123456789ABCDEF" : "0123456789abcdef";
 
 	if (n == 0)
 	{
@@ -25,7 +26,7 @@ int _print_hex(unsigned int n, int uppercase, char *buffer, size_t size)
 
 		while (n != 0 && index < size - 1)
 		{
-			digits[index - printed_chars] = base_digits[n % 16];
+			digits[index] = base_digits[n % 16];
 			n /= 16;
 			index++;
 			printed_chars++;
@@ -35,7 +36,7 @@ int _print_hex(unsigned int n, int uppercase, char *buffer, size_t size)
 		end = index - printed_chars - 1;
 		while (start < end)
 		{
-			temp = digits[start[]];
+			temp = digits[start];
 			digits[start] = digits[end];
 			digits[end] = temp;
 			start++;

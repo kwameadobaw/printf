@@ -35,7 +35,7 @@ int _print_hex(unsigned int n, int uppercase, char *buffer, size_t size)
 		end = index - printed_chars - 1;
 		while (start < end)
 		{
-			temp = digits[start[];
+			temp = digits[start[]];
 			digits[start] = digits[end];
 			digits[end] = temp;
 			start++;

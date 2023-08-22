@@ -31,8 +31,8 @@ int _print_binary(unsigned int n, char *buffer, size_t size)
 		while (start < end)
 		{
 			temp = buffer[start];
-			buffer[start] = buffer[end]
-				buffer[end] = temp;
+			buffer[start] = buffer[end];
+			buffer[end] = temp;
 			start++;
 			end--;
 		}

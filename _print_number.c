@@ -3,6 +3,10 @@
 int _print_number(int n, char *buffer, size_t size)
 {
 	int printed_chars;
+	size_t start;
+	size_t end;
+	char temp;
+	size_t index;
 
 	printed_chars = 0;
 
@@ -15,9 +19,6 @@ int _print_number(int n, char *buffer, size_t size)
 		printed_chars++;
 		n = -n;
 	}
-
-	size_t index;
-
 	index = printed_chars;
 	while (n != 0 && index < size - 1)
 	{
@@ -26,11 +27,6 @@ int _print_number(int n, char *buffer, size_t size)
 		index++;
 		printed_chars++;
 	}
-
-	size_t start;
-	size_t end;
-	char temp;
-
 	start = printed_chars > 0 ? printed_chars - 1 : 0;
 	end = index - 1;
 	while (start < end)

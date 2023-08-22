@@ -1,17 +1,24 @@
 #include "main.h"
+
 /**
- * print_int - Print an integer
+ * _printf_int - Print an integer
  * @args: Arguments list
  *
  * Return: Number oof characters printed
 */
-int _printf(const char *format, ...)
+int _printf_int(const char *format, ...)
 {
 	va_list args;
+<<<<<<< HEAD:MOnday_files/1-printf.c
 	int count, num;
+=======
+	int count;
+	int n;
+>>>>>>> 795812eacdfb12b79edc6fcf6b8eff47ae1300c8:1-printf.c
 
 	va_start(args, format);
 	count = 0;
+	n = va_arg(args, int);
 
 	while (*format != '\0')
 	{
@@ -27,9 +34,8 @@ int _printf(const char *format, ...)
 			}
 			else if (*format == 'd' || *format == 'i')
 			{
-				int num;
 
-				num = va_arg(args, int);
+				_putchar(n + '0');
 			}
 			else
 			{

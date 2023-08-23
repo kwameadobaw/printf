@@ -24,10 +24,10 @@ int _printf_int(const char *format, ...);
 int _process_format_specifier(const char **format, char *buffer, size_t remaining_size, va_list args, int *printed_chars);
 int _print_num_rec(int n, char *buffer, size_t size, size_t index);
 int _print_number_base(unsigned int n, int base, int uppercase);
-int _print_unsigned_decimal(va_list args, char *buffer, int *buffer_index);
-int _print_octal(va_list args, char *buffer, int *buffer_index);
-int _print_hex_lower(va_list args, char *buffer, int *buffer_index);
-int _print_hex_upper(va_list args, char *buffer, int *buffer_index);
+int _print_u(va_list args, char *buffer, int *buffer_index);
+int _print_o(va_list args, char *buffer, int *buffer_index);
+int _print_hex_lo(va_list args, char *buffer, int *buffer_index);
+int _print_hex_up(va_list args, char *buffer, int *buffer_index);
 int hex_printf(const char *format, ...);
 
 #endif /* MAIN_H */

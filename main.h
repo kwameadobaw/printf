@@ -26,7 +26,8 @@ int _print_num_rec(int n, char *buffer, size_t size, size_t index);
 int _print_number_base(unsigned int n, int base, int uppercase);
 int _print_unsigned_decimal(va_list args, char *buffer, int *buffer_index);
 int _print_octal(va_list args, char *buffer, int *buffer_index);
-inr _print_hex_lower(va_list args, char *buffer, int *buffer_index
-int _print_hex_upper(va_list args, char *buffer, int *buffer, int *buffer_index);
+int _print_hex_lower(va_list args, char *buffer, int *buffer_index);
+int _print_hex_upper(va_list args, char *buffer, int *buffer_index);
+int hex_printf(const char *format, ...);
 
 #endif /* MAIN_H */

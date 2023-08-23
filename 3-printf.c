@@ -6,10 +6,12 @@
  *
  * Return: Number of characters printed.
 */
-int _printf(const char *format, ...)
+int hex_printf(const char *format, ...)
 {
 	va_list args;
 	int printed_chars;
+	int buffer_index;
+	char buffer[BUFFER_SIZE];
 
 	printed_chars = 0;
 	va_start(args, format);
@@ -36,12 +38,15 @@ int _printf(const char *format, ...)
 							&buffer_index);
 					break;
 				default:
+					break;
 			}
 		else
 		{
-			printed_chars += _putchar(*format, buffer, &buffer_index);
+			_putchar(*format);
+			buffer[buffer_index] = *format;
+			buffer_index++;
 		}
-		format++
+		format++;
 	}
 	write(1, buffer, buffer_index);
 	va_end(args);

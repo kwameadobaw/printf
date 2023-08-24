@@ -1,8 +1,6 @@
 #include "main.h"
 /**
- * _print_number - Print numbers
- * This function prints an integer number
- * using variadic functions, malloc, and function pointers.
+ * _print_number - A function to print a number
  * @n: The integer number to be printed.
  * @buffer: The buffer to store the number representation.
  * @size: The size of the buffer.
@@ -13,7 +11,8 @@ int _print_number(int n, char *buffer, size_t size,
 		void (*print_digit)(char *buffer, int digit))
 {
 	int printed_chars = 0;
-	size_t index;
+
+	size_t = index;
 
 	if (n < 0)
 	{

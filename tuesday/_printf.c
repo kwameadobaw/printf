@@ -5,7 +5,7 @@
  * @...: The list of arguments to replace placeholders
  *
  * Return: The number of characters printed.
-*/ 
+*/
 int _printf(const cahr *format, ...)
 {
 	va_list args;

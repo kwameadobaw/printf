@@ -1,58 +1,100 @@
 #include "main.h"
 /**
- * _process_format_specifier - Process format specifier
+ * _process_format_specifier_char - Process format specifier
  * @format: Pointer to the format string
  * @buffer: The buffer to store the formatted output
  * @remaining_size: Remaining space in the buffer
  * @args: The arguments to be formatted
  * printed_Pointer to the number of printed characters
- * Return: THe number of characters written to the buffer
+ * Return: The number of characters written to the buffer
 */
-int _process_format_specifier(const char **format,
+int _process_format_specifier_char(const char **format,
 		char *buffer,
 		size_t remaining_size,
 		va_list args,
-		int *printed_chars)
+		int *printed_chars,
+		void (*print_char)(char *buffer, int character))
 {
 	int chars_written;
 
 	chars_written = 0;
 
-	switch (**format)
+	if (**format == '%)
 	{
-		case 'c':
-			buffer[chars_written++] = va_arg(args, int);
-			(*printed_chars)++;
-			break;
-		case 's':
-			chars_written += _print_string(&buffer[chars_written],
-					remaining_size - chars_written,
-					va_arg(args, const char *));
-			(*printed_chars) += chars_written;
-			break;
-		case '%':
-			buffer[chars_written++] = '%';
-			(*printed_chars)++;
-			break;
-		case 'd':
-		case 'i':
-			chars_written += _print_number(va_arg(args, int),
-					&buffer[chars_written],
-					remaining_size - chars_written);
-			(*printed_chars) += chars_written;
-			break;
-		case 'b':
-			chars_written += _print_binary(va_arg(args, unsigned int),
-					&buffer[chars_written],
-					remaining_size - chars_written);
-			(*printed_chars) += chars_written;
-			break;
-
-		default: buffer[chars_written++] = '%';
-			 buffer[chars_written++] = **format;
-			 (*printed_chars) += chars_written;
-			 break;
+		print_char(buffer + chars_written++, '%');
+		(*printed_chars)++;
 	}
+	else
+	{
+		print_char(buffer + chars_written++, va_arg(args, int));
+		(*printed_chars)++;
+	}
+
+	(*format)++;
+	return (chars_written);
+	
+#include "main.h"
+/**
+ * _process_format_specifier_string - Process format specifier
+ * @format: Pointer to the format string
+ * @buffer: The buffer to store the formatted output
+ * @remaining_size: Remaining space in the buffer
+ * @args: The arguments to be formatted
+ * printed_Pointer to the number of printed characters
+ * Return: The number of characters written to the buffer
+*/
+int _process_format_specifier_string(const char **format,
+		char *buffer,
+		size_t remaining_size,
+		va_list args,
+		int *printed_chars,
+		void (*print_char)(char *buffer, int character))
+{
+	int chars_written;
+	const char *string;
+
+	chars_written = 0;
+
+	string = va_arg(args, const char *);
+	chars_written += _print_string(buffer + chars_written,
+			remaining_size - chars_written, string);
+	(*printed_chars) += chars_written;
+
+	(*format)++;
+	return (chars_written);
+	
+#include "main.h"
+/**
+ * _process_format_specifier_number - Process format specifier
+ * @format: Pointer to the format string
+ * @buffer: The buffer to store the formatted output
+ * @remaining_size: Remaining space in the buffer
+ * @args: The arguments to be formatted
+ * printed_Pointer to the number of printed characters
+ * Return: The number of characters written to the buffer
+*/
+int _process_format_specifier_char(const char **format,
+		char *buffer,
+		size_t remaining_size,
+		va_list args,
+		int *printed_chars,
+		void (*print_char)(char *buffer, int character))
+{
+	int chars_written;
+	int base;
+	int uppercase;
+
+	chars_written = 0;
+
+	base = (**format == 'x') ? 16 : 10;
+	uppercase = (**format == 'X');
+	(*format)++;
+
+	chars_written += _print_unsigned(va_arg(args, unsigned int), base,
+			uppercase, buffer + chars_written,
+			remaining_size - chars_written, print_char);
+	(*printed_chars) += chars_written;
+
 	(*format)++;
 	return (chars_written);
 }

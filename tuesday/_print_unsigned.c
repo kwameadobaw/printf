@@ -10,11 +10,10 @@
  * Return: The number of characters printed
 */
 
-int _print_unsigned(unsigned int n, int base,
-		int uppercase, char *buffer, size_t size)
+int _print_unsigned(unsigned int n, int base, char *buffer)
 {
 	static const char base_digits[] = "0123456789ABCDEF";
-	int printed_chars, i;
+	int printed_chars, i, size;
 	char digits[16];
 
 	printed_chars = 0;
@@ -38,7 +37,7 @@ int _print_unsigned(unsigned int n, int base,
 
 	for (i = 0; i < printed_chars; i++)
 	{
-		buffer[i] = digits[printed_chars - i - 1]
+		buffer[i] = digits[printed_chars - i - 1];
 	}
 
 	buffer[printed_chars] = '\0';

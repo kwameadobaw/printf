@@ -24,7 +24,7 @@ int _vsnprintf(char *buffer, size_t size, const char *format,
 			{
 				if (*format == format_specs[i].specifier)
 				{
-					printed_chars += format_specs[i}.print_func(&buffer[buffer_index],
+					printed_chars += format_specs[i].print_func(&buffer[buffer_index],
 						 size - buffer_index, args);
 					break;
 				}
@@ -40,8 +40,10 @@ int _vsnprintf(char *buffer, size_t size, const char *format,
 			buffer[buffer_index++] = *format;
 			printed_chars++;
 		}
+
 		format++;
 	}
+
 	buffer[buffer_index] = '\0';
 	return (printed_chars);
 }

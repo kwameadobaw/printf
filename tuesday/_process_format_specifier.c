@@ -20,7 +20,7 @@ int _process_format_specifier_char(const char **format,
 
 	chars_written = 0;
 
-	if (**format == '%)
+	if (**format == '%')
 	{
 		print_char(buffer + chars_written++, '%');
 		(*printed_chars)++;
@@ -78,9 +78,8 @@ int _process_format_specifier_string(const char **format,
 */
 int _process_format_specifier_char(const char **format,
 		char *buffer,
-		size_t remaining_size,
 		va_list args,
-		int *printed_chars,
+		int *chars_written,
 		void (*print_char)(char *buffer, int character))
 {
 	int chars_written;

@@ -12,6 +12,7 @@
 
 int _print_unsigned(unsigned int n, int base, char *buffer)
 {
+	void(uppercase);
 	static const char base_digits[] = "0123456789ABCDEF";
 	int printed_chars, i, size;
 	char digits[16];

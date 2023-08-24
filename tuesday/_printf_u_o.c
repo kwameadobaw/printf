@@ -16,6 +16,11 @@ int _handle_u_o_specifier(const char **format, char *buffer,
 		int *printed_chars)
 {
 	int chars_written, base;
+=======
+		void (*print_char)(char *buffer, int character),
+		int *printed_chars);
+{
+	int chars_written, base, uppercase;
 
 	chars_written = 0;
 	if (**format == 'u' || **format == 'o')
@@ -26,6 +31,9 @@ int _handle_u_o_specifier(const char **format, char *buffer,
 
 	chars_written += _print_unsigned(va_arg(args, unsigned int),
 			base, buffer);
+			base, uppercase, buffer + chars_written,
+		       	remaining_size - chars_written, print_char,
+			*printed_chars);
 	(*printed_chars) += chars_written;
 	}
 

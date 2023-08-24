@@ -7,9 +7,12 @@
 */
 int _putchar(char c)
 {
-	if (buffer_index == buffer_size - 1)
+	static char buffer[BUFFER_SIZE];
+	static size_t buffer_index = 0;
+
+	if (buffer_index == BUFFER_SIZE - 1)
 	{
-		write(1, buffer, BUFFER_SIZE - 1);
+		write(1, buffer, buffer_index);
 		buffer_index = 0;
 	}
 

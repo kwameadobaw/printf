@@ -20,7 +20,7 @@ int _process_format_specifier_char(const char **format,
 
 	chars_written = 0;
 
-	if (**format == '%)
+	if (**format == '%')
 	{
 		print_char(buffer + chars_written++, '%');
 		(*printed_chars)++;
@@ -142,4 +142,35 @@ int _Process_format_specifier_u_o(const char **format,
  * _handle_S-specifier - Handles the custom S specifier
  * @format: Pointer to the format string
  * @buffer: The buffer to store the formatted output
- * @remaining_size
+ * @remaining_size: Remaining space in the buffer.
+ * @args: The arguments to be formatted.
+ * @printed_chars: Pointer to the number of printed characters.
+ *
+ * Return: The number of characters written to the buffer.
+ */
+int _handle_S_specifier(const char **format,
+		char *buffer,
+		size_t remaining_size,
+		va_list args,
+		int *printed_chars)
+{
+	int chars_written;
+	const char *string = va_arg(args, const char *);
+
+	chars_written = 0;
+	while (*string && chars_written < remaining_size)
+	{
+		if (*string >= 32 && *string < 127)
+			buffer[chars_written++] = *string;
+		else
+		{
+			chars_written += _print_char_hex(buffer + chars_written,
+					remaining_size - chars_written,
+					*string);
+		}
+		string++;
+	}
+	*printed_chars += chars_written;
+	(*format)++;
+	return (chars_printed);
+}

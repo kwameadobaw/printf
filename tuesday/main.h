@@ -15,15 +15,16 @@
 */
 typedef struct FormatSpec {
 	char specifier;
-	int (*print_func)(char *, size,_t, va_list);
+	int (*print_func)(char *, size_t, va_list);
 } FormatSpec;
 
 int _putchar(char c);
 int _printf(const char *format, ...);
 int _vsnprintf(char *buffer, size_t size, const char *format, va_list args);
-int _print_number(int n, char *buffer, size_t size);
 int _print_unsigned(unsigned int n, int base, int uppercase, char *buffer, size_t size);
 int _print_binary(unsigned int n, char *buffer, size_t size);
 int _print_hex(unsigned int n, int uppercase, char *buffer, size_t size);
+int _print_number(int n, char *buffer, size_t size,
+		void (*print_digit)(char *buffer, int digit));
 
 #endif /* MAIN_H */

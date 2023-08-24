@@ -13,6 +13,7 @@
 int _print_unsigned(unsigned int n, int base,
 		int uppercase, char *buffer, size_t size)
 {
+	static const char base_digits[] = "0123456789ABCDEF";
 	int printed_chars, i;
 	char digits[16];
 
@@ -35,7 +36,7 @@ int _print_unsigned(unsigned int n, int base,
 		}
 	}
 
-	for (int i = 0; i < printed_chars; i++)
+	for (i = 0; i < printed_chars; i++)
 	{
 		buffer[i] = digits[printed_chars - i - 1]
 	}

@@ -10,9 +10,12 @@
 int _print_number(int n, char *buffer, size_t size,
 		void (*print_digit)(char *buffer, int digit))
 {
-	int printed_chars = 0;
+	(void)size;
+	int printed_chars;
+	int index;
 
-	size_t = index;
+	printed_chars = 0;
+	index = 0;
 
 	if (n < 0)
 	{

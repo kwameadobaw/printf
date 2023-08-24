@@ -19,13 +19,14 @@ int _handle_u_o_specifier(const char **format, char *buffer,
 	int chars_written, basee, uppercase;
 
 	chars_written = 0;
-	base = (**format == 'o') 8 :10;
+	base = (**format == 'o') ? 8 :10;
 	uppercase = 0;
 
 	chars_written += _print_unsigned(va_arg(args, unsigned int),
 			base, uppercase, buffer + chars_written,
-		       	remaining_size - chars_written, print_char;
-			(*printed)chars) += chars_written;
+		       	remaining_size - chars_written, print_char,
+			printedchars);
+	(*printed_chars) += chars_written;
 	(*format)++;
 	return (chars_written);
 }

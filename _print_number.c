@@ -1,47 +1,33 @@
 #include "main.h"
 /**
- * _print_num_rec - Recursively print an int to buffer
- * @n: The interger to be printed
- * @buffer: The buffer to store the printed string.
- * @size: The size of the buffer
- * @index: The number of characters printed.
-*/
-int _print_num_rec(int n, char *buffer, size_t size, size_t index)
+ * _print_number - Print numbers
+ * This function prints an integer number
+ * using variadic functions, malloc, and function pointers.
+ * @n: The integer number to be printed.
+ * @buffer: The buffer to store the number representation.
+ * @size: The size of the buffer.
+ * @print_digit: A pointer to a function that prints a single digit.
+ * Return: The number of characters printed.
+ */
+int _print_number(int n, char *buffer, size_t size,
+		void (*print_digit)(char *buffer, int digit))
 {
-	int digits;
+	int printed_chars = 0;
+	size_t index;
 
-	if (n == 0)
+	if (n < 0)
 	{
-		buffer[index] = '0';
-		return (0);
+		print_digit(buffer, '-');
+		printed_chars++;
+		n = -n;
 	}
-	else if (n < 0)
-	{
-		buffer[index] = '-';
-		return (1) + (_print_num_rec(-n, buffer, size, index + 1));
-	}
-	else if (index >= size - 1)
-		return (0);
-	else
-	{
-		digits = _print_num_rec(n / 10, buffer, size, index);
-		buffer[index + digits] = (n % 10) + '0';
-		return (digits + 1);
-	}
-}
 
-/**
- * print_number - Print an integer to buffer
- * @n: The integer to be printed
- * @buffer: The buffer to store the printed string
- * @size: The size of the buffer
- * Return: The number of characters printed
-*/
-int _print_number(int n, char *buffer, size_t size)
-{
-	size_t index = 0;
-	int printed_chars = _print_num_rec(n, buffer, size, index);
-
-	buffer[printed_chars] = '\0';
+	index = printed_chars;
+	while (n != 0)
+	{
+		print_digit(buffer + index++, (n % 10) + '0');
+		n /= 10;
+	}
+	buffer[index] = '\0';
 	return (printed_chars);
 }

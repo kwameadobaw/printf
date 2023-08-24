@@ -12,8 +12,9 @@ int _vsnprintf(char *buffer, size_t size, const char *format,
 		va_list args)
 {
 	int printed_chars, buffer_index, i;
+	printed_chars = buffer_index = 0;
 
-	while (*format && buffer_index < size - 1)
+	while (*format && (size_t)buffer_index < size - 1)
 	{
 		if (*format == '%')
 		{
@@ -23,13 +24,12 @@ int _vsnprintf(char *buffer, size_t size, const char *format,
 			{
 				if (*format == format_specs[i].specifier)
 				{
-					printed_chars += format_specs[i[.print_func
-						(&buffer[buffer_index],
+					printed_chars += format_specs[i}.print_func(&buffer[buffer_index],
 						 size - buffer_index, args);
 					break;
 				}
 			}
-			if (!format_spec[i].specifier)
+			if (!format_specs[i].specifier)
 			{
 				buffer[buffer_index++] = '%';
 				printed_chars++;
@@ -42,6 +42,6 @@ int _vsnprintf(char *buffer, size_t size, const char *format,
 		}
 		format++;
 	}
-	buffer[buffer_inded] = '\0';
+	buffer[buffer_index] = '\0';
 	return (printed_chars);
 }

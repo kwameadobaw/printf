@@ -10,15 +10,16 @@
 */
 int _print_hex(unsigned int n, int uppercase, char *buffer, size_t size)
 {
-	int printed_chars = 0, i;
-	size_t index = 0, start = 0, end = index - printed_chars - 1;
+	int printed_chars = 0;
+	size_t index = 0, start = 0, end = index - printed_chars - 1, i;
 	char digits[16], temp;
+	const char *base_digits = uppercase ? "0123456789ABCDEF" : "0123456789abcdef";
 
 	if (n == 0)
 	{
 		if (size > 0)
-			buffer[0] = '0';
 		{
+			buffer[0] = '0';
 			printed_chars++;
 		}
 		else

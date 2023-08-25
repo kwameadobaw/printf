@@ -1,8 +1,10 @@
-#include <stdarg.h>
-#include <unistd.h>
 #include "main.h"
-char buffer[BUFFER_SIZE];
-int buffer_index = 0;
+/**
+ * _printf - Print formatted output to stdout
+ * @format: The format string
+ * @...: Additional arguments for formatting
+ * Return: The number of characters printed (excluding null byte)
+*/
 int _printf(const char *format, ...)
 {
 	va_list args;

@@ -1,4 +1,10 @@
 #include "main.h"
+/**
+ * _putchar - Writes a character to the output buffer
+ * @c: The character to be written
+ *
+ * return: Return 1.
+*/
 
 int _putchar(char c)
 {
@@ -8,7 +14,7 @@ int _putchar(char c)
 	if (buffer_index == (BUFFER_SIZE) - 1)
 	{
 		write(1, buffer, BUFFER_SIZE - 1);
-		BUFFER_SIZE = 0;
+		buffer_index = 0;
 	}
 
 	buffer[buffer_index++] = c;

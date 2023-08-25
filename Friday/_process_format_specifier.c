@@ -30,6 +30,7 @@ int _process_format_specifier(const char **format, char *buffer,
 		case 'u':
 			chars_written += _print_unsigned(&buffer[chars_written],
 					remaining_size - chars_written, args);
+			break;
 		case 'b':
 			chars_written += _print_binary(&buffer[chars_written],
 					remaining_size - chars_written, args);
@@ -37,9 +38,11 @@ int _process_format_specifier(const char **format, char *buffer,
 		case 'o':
 			chars_written += _print_octal(&buffer[chars_written],
 					remaining_size - chars_written, args);
+			break;
 		case 'x':
 			chars_written += _print_hex_lower(&buffer[chars_written],
 				       	remaining_size - chars_written, args);
+			break;
 		case 'X':
 			chars_written += _print_hex_upper(&buffer[chars_written],
 					remaining_size - chars_written, args);

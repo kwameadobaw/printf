@@ -73,9 +73,9 @@ static int handle_decimal_format(char *buffer, size_t size, va_list args)
 		n = -n;
 	}
 
-	chars_written += -print_number(n, buffer, size);
+	chars_written += _print_number(n, buffer, size);
 
-	if (is_negative && chars_written < size)
+	if (is_negative && (size_t)chars_written < size)
 	{
 		buffer[chars_written] = '-';
 		chars_written++;
